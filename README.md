@@ -112,6 +112,6 @@ Após rodar o projeto, a documentação Swagger estará disponível em:
 
 Se desejar testar o front-end integrado à API, você pode acessar o repositório do front-end aqui:
 
-🔗 Repositório Frontend
+> 🔗 [Repositório Frontend](https://github.com/AndersonAlvesCoelho/colmeia-payment)
 
 Siga as instruções no README do front-end para rodar o projeto
