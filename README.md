@@ -4,8 +4,6 @@
 ![UIShadcn](https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff&style=for-the-badge)
 ![Version](https://img.shields.io/badge/V0.1-100000?style=for-the-badge&logo=github&logoColor=white)
 
-
-
 API RESTful desenvolvida em **NestJS** para o ecossistema **Colmeia Pagamentos**, responsável por cadastro de clientes, criação de cobranças (Pix, Boleto e Cartão) e registro de logs de auditoria em banco separado.
 
 A aplicação foi projetada para rodar em ambiente **Docker Compose**, com **PostgreSQL** como base principal e **MariaDB** dedicado às auditorias do sistema.
