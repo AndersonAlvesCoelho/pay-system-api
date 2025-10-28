@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/.prisma/audit-client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("AUDIT_DATABASE_URL")
+}
+
+model AuditLog {
+  id         Int     @id @default(autoincrement()) @map("log_id")
+  customerId String  @map("customerId")
+  entityType String  @map("entity_type")
+  action     String
+  userId     String? @map("user_id")
+  details    Json?
+  message    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("audit_logs")
+}

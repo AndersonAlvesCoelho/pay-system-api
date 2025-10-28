@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  #  PostgreSQL (Banco principal)
+  postgres:
+    image: postgres:14-alpine
+    container_name: colmeia_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - '5432:5432'
+    volumes:
+      - colmeia_postgres:/var/lib/postgresql/data
+    networks:
+      - colmeia_network
+
+  #  MariaDB (Logs e auditoria)
+  mariadb:
+    image: mariadb:10.6
+    container_name: colmeia_mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASS}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+    ports:
+      - '3306:3306'
+    volumes:
+      - colmeia_mariadb:/var/lib/mysql
+    networks:
+      - colmeia_network
+
+  #  API NestJS
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: colmeia_api
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - mariadb
+    networks:
+      - colmeia_network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: >
+      sh -c "
+        npx prisma migrate deploy --schema=prisma/main/schema.prisma &&
+        npx prisma migrate deploy --schema=prisma/audit/schema.prisma &&
+        npm run start:prod
+      "
+
+# Volumes persistentes
+volumes:
+  colmeia_postgres:
+  colmeia_mariadb:
+
+# Rede compartilhada
+networks:
+  colmeia_network:
+    driver: bridge

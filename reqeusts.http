@@ -1,0 +1,94 @@
+# ===============================
+# Variáveis de ambiente
+# ===============================
+@baseUrl = http://localhost:8080/api/v1
+@contentType = application/json
+@v1 = v1
+
+# ===============================
+# Auth
+# ===============================
+
+### 
+# @name registerUser
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "name": "Anderson Alves",
+  "email": "anderson@email.com",
+  "password": "SenhaForte123!"
+}
+
+###
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "anderson.200@example.com",
+  "password": "12345678"
+}
+
+###
+@authToken = {{login.response.body.access_token}}
+
+###
+# @name me
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+# ===============================
+# Customers
+# ===============================
+
+###
+# @name createCustomer
+POST {{baseUrl}}/customer
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "João da Silva",
+  "email": "joao.silva@colmeia.com",
+  "document": "12345678901",
+  "phone": "(11) 98765-4321"
+}
+
+@customerId = {{createCustomer.response.body.id}}
+
+###
+# @name listCustomers
+GET {{baseUrl}}/customer?page=1&limit=10
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+#  Exemplos de filtros opcionais:
+# GET {{baseUrl}}/customer?page=2&limit=5&status=PAID
+# GET {{baseUrl}}/customer?paymentMethod=CREDIT_CARD&minAmount=100&maxAmount=1000
+# GET {{baseUrl}}/customer?startDate=2025-01-01&endDate=2025-12-31
+# GET {{baseUrl}}/customer?customerId=123e4567-e89b-12d3-a456-426614174000
+
+###
+# @name getCustomer
+GET {{baseUrl}}/customer/{{customerId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+###
+# @name updateCustomer
+PATCH {{baseUrl}}/customer/{{customerId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "João da Silva Junior",
+  "phone": "(11) 99999-8888"
+}
+
+###
+# @name deleteCustomer
+DELETE {{baseUrl}}/customer/{{customerId}}
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}

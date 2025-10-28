@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([email])
+}
+
+model Customer {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  name      String
+  document  String?   @unique
+  phone     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  charges Charge[]
+}
+
+model Charge {
+  id             String        @id @default(uuid())
+  amount         Decimal
+  currency       String        @default("BRL")
+  description    String?
+  status         ChargeStatus  @default(PENDING)
+  paymentMethod  PaymentMethod
+  idempotencyKey String        @unique
+
+  dueDate       DateTime?
+  paidAt        DateTime?
+  failureReason String?
+  metadata      Json?
+
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([customerId])
+  @@index([status])
+}
+
+// ENUM's
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PaymentMethod {
+  PIX
+  CREDIT_CARD
+  DEBIT_CARD
+  BANK_SLIP
+}
+
+enum ChargeStatus {
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+}
