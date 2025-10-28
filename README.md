@@ -1,8 +1,9 @@
 # 💳 Colmeia Pagamentos API
-![nestjs](https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
-![postgresql](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Next](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![UIShadcn](https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff&style=for-the-badge)
 ![Version](https://img.shields.io/badge/V0.1-100000?style=for-the-badge&logo=github&logoColor=white)
+
 
 
 API RESTful desenvolvida em **NestJS** para o ecossistema **Colmeia Pagamentos**, responsável por cadastro de clientes, criação de cobranças (Pix, Boleto e Cartão) e registro de logs de auditoria em banco separado.
@@ -107,3 +108,12 @@ E os bancos estarão disponíveis em:
 Após rodar o projeto, a documentação Swagger estará disponível em:
 
 > 🧭 [http://localhost:8080/api](http://localhost:8080/api/doc#/)
+
+
+## 💻 Frontend (opcional)
+
+Se desejar testar o front-end integrado à API, você pode acessar o repositório do front-end aqui:
+
+🔗 Repositório Frontend
+
+Siga as instruções no README do front-end para rodar o projeto
