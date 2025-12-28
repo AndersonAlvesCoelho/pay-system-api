@@ -39,7 +39,7 @@ describe('CustomerService', () => {
   const mockCustomer = {
     id: 'c1',
     name: 'João da Silva',
-    email: 'joao.silva@colmeia.com',
+    email: 'joao.silva@paysystem.com',
     document: '12345678901',
     phone: '(11) 98765-4321',
     createdAt: new Date(),
@@ -51,7 +51,7 @@ describe('CustomerService', () => {
     it('should create a customer successfully', async () => {
       const dto: CreateCustomerDto = {
         name: 'João da Silva',
-        email: 'joao.silva@colmeia.com',
+        email: 'joao.silva@paysystem.com',
         document: '12345678901',
         phone: '(11) 98765-4321',
       };
@@ -69,7 +69,7 @@ describe('CustomerService', () => {
       await expect(
         service.create({
           name: 'Outro',
-          email: 'joao.silva@colmeia.com',
+          email: 'joao.silva@paysystem.com',
         }),
       ).rejects.toThrow(ConflictException);
     });

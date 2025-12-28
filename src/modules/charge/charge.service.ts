@@ -49,6 +49,11 @@ export class ChargeService {
           currency: dto.currency ?? 'BRL',
           paymentMethod: dto.paymentMethod,
           idempotencyKey: dto.idempotencyKey,
+          dueDate: dto.dueDate,
+          description: dto.description,
+        },
+        include: {
+          customer: true,
         },
       });
 
@@ -175,7 +180,7 @@ export class ChargeService {
 
     const updated = await this.prismaMain.charge.update({
       where: { id },
-      data: dto,
+      data: dto, 
       include: { customer: true },
     });
 

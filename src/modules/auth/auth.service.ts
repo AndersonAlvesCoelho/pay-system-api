@@ -45,7 +45,12 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
     const user = await this.prisma.user.create({
-      data: { name: dto.name, email: dto.email, password: hashedPassword },
+      data: {
+        name: dto.name,
+        email: dto.email,
+        password: hashedPassword,
+        role: 'ADMIN',
+      },
     });
 
     // Retorna usuário sem senha

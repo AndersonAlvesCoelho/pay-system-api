@@ -44,35 +44,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # API NestJS
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: colmeia_api
-    restart: always
-    ports:
-      - ${PORT}:${PORT}
-    env_file:
-      - .env
-    depends_on:
-      postgres:
-        condition: service_healthy
-      mariadb:
-        condition: service_healthy
-    networks:
-      - colmeia_network
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/dist
-    command: >
-      sh -c "
-        npx prisma migrate deploy --schema=prisma/main/schema.prisma &&
-        npx prisma migrate deploy --schema=prisma/audit/schema.prisma &&
-        npm run start:dev
-      "
-
 # Volumes persistentes
 volumes:
   colmeia_postgres:

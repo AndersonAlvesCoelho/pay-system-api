@@ -24,7 +24,7 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Colmeia Pagamentos API')
+    .setTitle('Pay System Pagamentos API')
     .setDescription(
       'API RESTful para cadastro de clientes e criação de cobranças (Pix, Boleto, Cartão).',
     )

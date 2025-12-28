@@ -1,10 +1,10 @@
-# 💳 Colmeia Pagamentos API
+# 💳 Pay System Pagamentos API
 ![nestjs](https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![postgresql](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Version](https://img.shields.io/badge/V0.1-100000?style=for-the-badge&logo=github&logoColor=white)
 
-API RESTful desenvolvida em **NestJS** para o ecossistema **Colmeia Pagamentos**, responsável por cadastro de clientes, criação de cobranças (Pix, Boleto e Cartão) e registro de logs de auditoria em banco separado.
+API RESTful desenvolvida em **NestJS** para o ecossistema **Pay System Pagamentos**, responsável por cadastro de clientes, criação de cobranças (Pix, Boleto e Cartão) e registro de logs de auditoria em banco separado.
 
 A aplicação foi projetada para rodar em ambiente **Docker Compose**, com **PostgreSQL** como base principal e **MariaDB** dedicado às auditorias do sistema.
 
@@ -68,15 +68,15 @@ JWT_EXPIRES_IN=1d
 # Banco de Dados (PostgreSQL)
 DB_HOST=localhost
 DB_PORT=5432
-DB_USERNAME=colmeia
-DB_PASSWORD=123@colmeia
+DB_USERNAME=paysystem
+DB_PASSWORD=123@paysystem
 DB_DATABASE=colmeia_payment
 
 # MongoDB
 MARIADB_HOST=localhost
 MARIADB_PORT=3306
-MARIADB_USER=colmeia
-MARIADB_PASS=123@colmeia
+MARIADB_USER=paysystem
+MARIADB_PASS=123@paysystem
 MARIADB_DATABASE=colmeia_payment_logs
 MARIADB_ROOT_PASSWORD=root
 
@@ -112,6 +112,6 @@ Após rodar o projeto, a documentação Swagger estará disponível em:
 
 Se desejar testar o front-end integrado à API, você pode acessar o repositório do front-end aqui:
 
-> 🔗 [Repositório Frontend](https://github.com/AndersonAlvesCoelho/colmeia-payment)
+> 🔗 [Repositório Frontend](https://github.com/AndersonAlvesCoelho/paysystem-payment)
 
 Siga as instruções no README do front-end para rodar o projeto

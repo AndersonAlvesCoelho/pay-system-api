@@ -11,7 +11,7 @@ export class CustomerResponseDto {
   @ApiProperty({ description: 'Nome completo do cliente.', example: 'João da Silva' })
   name: string;
 
-  @ApiProperty({ description: 'E-mail do cliente.', example: 'joao.silva@colmeia.com' })
+  @ApiProperty({ description: 'E-mail do cliente.', example: 'joao.silva@paysystem.com' })
   email: string;
 
   @ApiProperty({ description: 'Documento do cliente (CPF ou CNPJ), se fornecido.', example: '12345678901', required: false })

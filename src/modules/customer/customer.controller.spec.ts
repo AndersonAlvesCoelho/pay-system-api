@@ -33,7 +33,7 @@ describe('CustomerController', () => {
   const mockCustomer = {
     id: 'c1',
     name: 'João da Silva',
-    email: 'joao.silva@colmeia.com',
+    email: 'joao.silva@paysystem.com',
     document: '12345678901',
     phone: '(11) 98765-4321',
     createdAt: new Date(),
@@ -44,7 +44,7 @@ describe('CustomerController', () => {
     it('should create a customer', async () => {
       const dto: CreateCustomerDto = {
         name: 'João da Silva',
-        email: 'joao.silva@colmeia.com',
+        email: 'joao.silva@paysystem.com',
         document: '12345678901',
         phone: '(11) 98765-4321',
       };
