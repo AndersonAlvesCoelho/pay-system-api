@@ -4,7 +4,7 @@ services:
   # PostgreSQL (Banco principal)
   postgres:
     image: postgres:14-alpine
-    container_name: colmeia_postgres
+    container_name: paysystem_postgres
     restart: always
     environment:
       POSTGRES_USER: ${DB_USERNAME}
@@ -13,11 +13,11 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - colmeia_postgres:/var/lib/postgresql/data
+      - paysystem_postgres:/var/lib/postgresql/data
     networks:
-      - colmeia_network
+      - paysystem_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,7 +25,7 @@ services:
   # MariaDB (Logs e auditoria)
   mariadb:
     image: mariadb:10.6
-    container_name: colmeia_mariadb
+    container_name: paysystem_mariadb
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root
@@ -35,9 +35,9 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - colmeia_mariadb:/var/lib/mysql
+      - paysystem_mariadb:/var/lib/mysql
     networks:
-      - colmeia_network
+      - paysystem_network
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
@@ -49,7 +49,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: colmeia_api
+    container_name: paysystem_api
     restart: always
     ports:
       - ${PORT}:${PORT}
@@ -61,7 +61,7 @@ services:
       mariadb:
         condition: service_healthy
     networks:
-      - colmeia_network
+      - paysystem_network
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -75,10 +75,10 @@ services:
 
 # Volumes persistentes
 volumes:
-  colmeia_postgres:
-  colmeia_mariadb:
+  paysystem_postgres:
+  paysystem_mariadb:
 
 # Rede compartilhada
 networks:
-  colmeia_network:
+  paysystem_network:
     driver: bridge

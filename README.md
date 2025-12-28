@@ -62,7 +62,7 @@ Antes de rodar o projeto, você precisa ter instalado:
 
 ```markdown
 PORT=8080
-JWT_SECRET=colmeia_secret
+JWT_SECRET=paysystem_secret
 JWT_EXPIRES_IN=1d
 
 # Banco de Dados (PostgreSQL)
@@ -70,14 +70,14 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=paysystem
 DB_PASSWORD=123@paysystem
-DB_DATABASE=colmeia_payment
+DB_DATABASE=paysystem_payment
 
 # MongoDB
 MARIADB_HOST=localhost
 MARIADB_PORT=3306
 MARIADB_USER=paysystem
 MARIADB_PASS=123@paysystem
-MARIADB_DATABASE=colmeia_payment_logs
+MARIADB_DATABASE=paysystem_payment_logs
 MARIADB_ROOT_PASSWORD=root
 
 # Prisma DB
@@ -86,12 +86,32 @@ AUDIT_DATABASE_URL="mysql://root:${MARIADB_ROOT_PASSWORD}@${MARIADB_HOST}:${MARI
 
 ```
 
-## 🐳 Rodando com Docker
 
-Para iniciar toda a stack (API + bancos de dados):
+##  Comandos Docker 
 
-```markdown
-docker compose up --build
+### Produção 
+```bash
+# Subir tudo
+docker-compose up -d --build
+
+# Ver logs
+docker-compose logs -f api
+
+# Parar
+docker-compose down
+```
+
+### Acessar containers
+```bash
+# Entrar no container da API
+docker exec -it paysystem_api sh
+
+# Entrar no PostgreSQL
+docker exec -it paysystem_postgres psql -U paysystem -d pay_system
+
+# Entrar no MariaDB
+docker exec -it paysystem_mariadb mysql -u root -p
+# Senha: root
 ```
 
 A API será iniciada em:
